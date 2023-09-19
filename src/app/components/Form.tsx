@@ -22,7 +22,7 @@ const Form = (): JSX.Element => {
       setValidateEmail(false);
       return alert("이메일을 확인해라");
     }
-    setValidateEmail(true);
+    setValidateEmail((prev) => (prev = true));
   };
   const checkPasswordReg = (password: string) => {
     const validatePasswordReg = PASSWORD_REGEX.test(password);
@@ -30,7 +30,7 @@ const Form = (): JSX.Element => {
       setValidatePassword(false);
       return alert("비밀번호를 확인해라");
     }
-    setValidatePassword(true);
+    setValidatePassword((prev) => (prev = true));
   };
   const checkValidateAndRouterHome = () => {
     const checkValidate = validateEmail && validatePassword;
@@ -44,11 +44,8 @@ const Form = (): JSX.Element => {
     checkEmailReg(email);
     checkPasswordReg(password);
     checkValidateAndRouterHome();
-  };
-
-  useEffect(() => {
     resetState();
-  }, []);
+  };
 
   return (
     <>
