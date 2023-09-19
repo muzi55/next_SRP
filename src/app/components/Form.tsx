@@ -37,6 +37,7 @@ const Form = (): JSX.Element => {
   const checkValidateAndRouterHome = () => {
     const checkValidate = validateEmail && validatePassword;
     if (checkValidate) {
+      resetState();
       router.push("home");
     }
   };
@@ -46,7 +47,6 @@ const Form = (): JSX.Element => {
     checkEmailReg(email);
     checkPasswordReg(password);
     checkValidateAndRouterHome();
-    resetState();
   };
 
   return (
@@ -54,7 +54,6 @@ const Form = (): JSX.Element => {
       <form action="POST" onSubmit={(e) => validateLoginFormhandle(e)}>
         <div>
           <div>
-            {" "}
             <label htmlFor="email">이메일 :</label>
             <input onChange={(e) => setEmail(e.target.value)} className="ml-2 px-2 py-1 border border-black rounded-lg" type="text" id="email" value={email} />
           </div>
