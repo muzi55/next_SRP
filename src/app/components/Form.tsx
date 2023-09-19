@@ -10,14 +10,20 @@ const Form = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const checkEmailReg = (email: string) => {
+    const validateEmailReg = EMAIL_REGEX.test(email);
+    if (!validateEmailReg) return alert("이메일을 확인해라");
+  };
+  const checkPasswordReg = (password: string) => {
+    const validatePasswordReg = PASSWORD_REGEX.test(password);
+    if (!validatePasswordReg) return alert("비밀번호를 확인해라");
+  };
+
   const validateLoginFormhandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const validateEmailReg = EMAIL_REGEX.test(email);
-    const validatePasswordReg = PASSWORD_REGEX.test(password);
-
-    if (!validateEmailReg) return alert("이메일을 확인해라");
-    if (!validatePasswordReg) return alert("비밀번호를 확인해라");
+    checkEmailReg(email);
+    checkPasswordReg(password);
 
     router.push("home");
   };
