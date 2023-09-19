@@ -1,17 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const EMAIL_REGEX = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
 const PASSWORD_REGEX = new RegExp(/^(?=.*[A-Za-z])(?=.*\d).{6,}$/);
-const WAIT_TIME = setTimeout(() => {}, 500);
 
 const Form = (): JSX.Element => {
+  let validateEmail: boolean = false;
+  let validatePassword: boolean = false;
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
-  const [validateEmail, setValidateEmail] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
-  const [validatePassword, setValidatePassword] = useState<boolean>(false);
 
   const resetState = () => {
     setEmail("");
@@ -20,31 +19,25 @@ const Form = (): JSX.Element => {
   const checkEmailReg = (email: string) => {
     const validateEmailReg = EMAIL_REGEX.test(email);
     if (!validateEmailReg) {
-      setValidateEmail(false);
-      WAIT_TIME;
+      validateEmail = false;
       return alert("이메일을 확인해라");
     }
-    setValidateEmail((prev) => (prev = true));
-    WAIT_TIME;
+    validateEmail = true;
   };
 
   const checkPasswordReg = (password: string) => {
     const validatePasswordReg = PASSWORD_REGEX.test(password);
     if (!validatePasswordReg) {
-      setValidatePassword(false);
-      WAIT_TIME;
+      validatePassword = false;
       return alert("비밀번호를 확인해라");
     }
-    setValidatePassword((prev) => (prev = true));
-    WAIT_TIME;
+    validatePassword = true;
   };
 
   const checkValidateAndRouterHome = () => {
     const checkValidate = validateEmail && validatePassword;
     if (checkValidate) {
-      resetState();
       router.push("home");
-      return;
     }
   };
 
@@ -53,6 +46,7 @@ const Form = (): JSX.Element => {
     checkEmailReg(email);
     checkPasswordReg(password);
     checkValidateAndRouterHome();
+    resetState();
   };
 
   return (
