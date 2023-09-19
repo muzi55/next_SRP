@@ -4,10 +4,10 @@ import React, { useState } from "react";
 
 const EMAIL_REGEX = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
 const PASSWORD_REGEX = new RegExp(/^(?=.*[A-Za-z])(?=.*\d).{6,}$/);
+let validateEmail: boolean = false;
+let validatePassword: boolean = false;
 
 const Form = (): JSX.Element => {
-  let validateEmail: boolean = false;
-  let validatePassword: boolean = false;
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -51,7 +51,7 @@ const Form = (): JSX.Element => {
 
   return (
     <>
-      <form action="POST" onSubmit={(e) => validateLoginFormhandle(e)}>
+      <form action="POST" onSubmit={validateLoginFormhandle}>
         <div>
           <div>
             <label htmlFor="email">이메일 :</label>
