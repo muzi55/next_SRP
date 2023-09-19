@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 const EMAIL_REGEX = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
 const PASSWORD_REGEX = new RegExp(/^(?=.*[A-Za-z])(?=.*\d).{6,}$/);
+const WAIT_TIME = setTimeout(() => {}, 500);
 
 const Form = (): JSX.Element => {
   const router = useRouter();
@@ -20,22 +21,30 @@ const Form = (): JSX.Element => {
     const validateEmailReg = EMAIL_REGEX.test(email);
     if (!validateEmailReg) {
       setValidateEmail(false);
+      WAIT_TIME;
       return alert("이메일을 확인해라");
     }
     setValidateEmail((prev) => (prev = true));
+    WAIT_TIME;
   };
+
   const checkPasswordReg = (password: string) => {
     const validatePasswordReg = PASSWORD_REGEX.test(password);
     if (!validatePasswordReg) {
       setValidatePassword(false);
+      WAIT_TIME;
       return alert("비밀번호를 확인해라");
     }
     setValidatePassword((prev) => (prev = true));
+    WAIT_TIME;
   };
+
   const checkValidateAndRouterHome = () => {
     const checkValidate = validateEmail && validatePassword;
     if (checkValidate) {
+      resetState();
       router.push("home");
+      return;
     }
   };
 
@@ -44,7 +53,6 @@ const Form = (): JSX.Element => {
     checkEmailReg(email);
     checkPasswordReg(password);
     checkValidateAndRouterHome();
-    resetState();
   };
 
   return (
