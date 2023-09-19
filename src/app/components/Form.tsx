@@ -54,10 +54,15 @@ const Form = (): JSX.Element => {
     <>
       <form action="POST" onSubmit={(e) => validateLoginFormhandle(e)}>
         <div>
-          <label htmlFor="email">이메일 :</label>
-          <input onChange={(e) => setEmail(e.target.value)} className="ml-2 px-2 py-1 border border-black rounded-lg" type="text" id="email" value={email} />
-          <label htmlFor="password">비밀번호 :</label>
-          <input onChange={(e) => setPassword(e.target.value)} className="ml-2 px-2 py-1 border border-black rounded-lg" type="password" id="password" value={password} />
+          <div>
+            {" "}
+            <label htmlFor="email">이메일 :</label>
+            <input onChange={(e) => setEmail(e.target.value)} className="ml-2 px-2 py-1 border border-black rounded-lg" type="text" id="email" value={email} />
+          </div>
+          <div>
+            <label htmlFor="password">비밀번호 :</label>
+            <input onChange={(e) => setPassword(e.target.value)} className="ml-2 px-2 py-1 border border-black rounded-lg" type="password" id="password" value={password} />
+          </div>
         </div>
         <button>로그인</button>
       </form>
